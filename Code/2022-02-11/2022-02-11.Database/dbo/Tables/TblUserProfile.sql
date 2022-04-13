@@ -1,6 +1,6 @@
-﻿CREATE TABLE [dbo].[UserProfile]
+﻿CREATE TABLE [dbo].[TblUserProfile]
 (
-	[Id] INT NOT NULL PRIMARY KEY,
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
 	[UserId] VARCHAR(100) NOT NULL,
 	[FirstName] VARCHAR(50)  NULL,
 	[LastName] VARCHAR(50)  NULL,
