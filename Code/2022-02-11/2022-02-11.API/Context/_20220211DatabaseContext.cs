@@ -46,8 +46,6 @@ namespace _2022_02_11.API.Context
     }
 ));
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.FirstName)
                     .HasMaxLength(50)
                     .IsUnicode(false);
