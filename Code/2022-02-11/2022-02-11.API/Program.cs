@@ -1,6 +1,7 @@
 using _2022_02_11.API.Context;
 using _2022_02_11.API.DataAccess.Interfaces;
 using _2022_02_11.API.DataAccess.Repositories;
+using _2022_02_11.Entities.DataSeeding;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 //using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -61,8 +62,7 @@ builder.Services.AddDbContext<_20220211IdentityContext>(options =>
 //    options.Lockout.AllowedForNewUsers = true;
 
 //    // User settings.
-//    options.User.AllowedUserNameCharacters =
-//    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+//    options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
 //    options.User.RequireUniqueEmail = false;
 //});
 
@@ -72,6 +72,7 @@ builder.Services.AddDbContext<_20220211IdentityContext>(options =>
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
+    // Password settings.
     options.Password.RequireDigit = true;
     options.Password.RequireLowercase = true;
     options.Password.RequireUppercase = true;
@@ -100,21 +101,17 @@ builder.Services.AddAuthentication(auth =>
     };
 });
 
-//builder.Services.AddScoped<UsersSeeding>();
-
-
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<IUserProfileRepository, UserProfileRepository>();
 
 
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-//var service = app.Services.GetRequiredService<UsersSeeding>();
-//await service.SeedData();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
