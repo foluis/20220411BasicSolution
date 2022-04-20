@@ -2,6 +2,8 @@ using _2022_02_11.API.Context;
 using _2022_02_11.API.DataAccess.Interfaces;
 using _2022_02_11.API.DataAccess.Repositories;
 using _2022_02_11.Entities.DataSeeding;
+using _2022_02_11.Repositories;
+using _20220211.Identity.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 //using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -20,7 +22,7 @@ builder.Services.AddDbContext<_20220211DatabaseContext>(
     options => options.UseSqlServer(
         builder.Configuration.GetConnectionString("2022-02-11Database")));
 
-builder.Services.AddDbContext<_20220211IdentityContext>(options =>
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityDatabase")));
 
 
@@ -78,7 +80,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     options.Password.RequireUppercase = true;
     options.Password.RequireNonAlphanumeric = true;
     options.Password.RequiredLength = 6;
-}).AddEntityFrameworkStores<_20220211IdentityContext>()
+}).AddEntityFrameworkStores<ApplicationDbContext>()
               .AddDefaultTokenProviders();
 
 
@@ -100,6 +102,8 @@ builder.Services.AddAuthentication(auth =>
         ValidateIssuerSigningKey = true
     };
 });
+
+builder.Services.AddScoped<IUnitOfWork, EfUnitOfWork>();
 
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<IUserProfileRepository, UserProfileRepository>();

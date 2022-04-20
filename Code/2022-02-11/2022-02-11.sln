@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2022-02-11.Entities", "2022
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2022-02-11.API", "2022-02-11.API\2022-02-11.API.csproj", "{0C766900-24E1-4C60-9AD0-9C9968D82E65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "20220211.Identity", "20220211.Identity\20220211.Identity.csproj", "{32719CB5-C67B-4A5C-BFA2-C84A629B750D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "20220211.Identity", "20220211.Identity\20220211.Identity.csproj", "{32719CB5-C67B-4A5C-BFA2-C84A629B750D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2022-02-11.Repositories", "2022-02-11.Repositories\2022-02-11.Repositories.csproj", "{28DDC052-6587-4739-B9E1-83A00C7F6464}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{32719CB5-C67B-4A5C-BFA2-C84A629B750D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32719CB5-C67B-4A5C-BFA2-C84A629B750D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32719CB5-C67B-4A5C-BFA2-C84A629B750D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28DDC052-6587-4739-B9E1-83A00C7F6464}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28DDC052-6587-4739-B9E1-83A00C7F6464}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28DDC052-6587-4739-B9E1-83A00C7F6464}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28DDC052-6587-4739-B9E1-83A00C7F6464}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
