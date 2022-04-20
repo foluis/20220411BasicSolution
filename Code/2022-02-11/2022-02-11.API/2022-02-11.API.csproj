@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Context\_20220211IdentityContext.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.4" />
@@ -17,6 +21,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\2022-02-11.Entities\2022-02-11.Entities.csproj" />
+    <ProjectReference Include="..\2022-02-11.Repositories\2022-02-11.Repositories.csproj" />
+    <ProjectReference Include="..\20220211.Identity\20220211.Identity.csproj" />
   </ItemGroup>
 
 </Project>

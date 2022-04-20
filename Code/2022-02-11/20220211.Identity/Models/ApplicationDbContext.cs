@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using _2022_02_11.Entities.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace _20220211.Identity.Models
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions options) : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
     }
