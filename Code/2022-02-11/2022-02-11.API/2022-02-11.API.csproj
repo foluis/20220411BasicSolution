@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\2022-02-11.Entities\2022-02-11.Entities.csproj" />
+    <ProjectReference Include="..\2022-02-11.Infrastructure\2022-02-11.Infrastructure.csproj" />
     <ProjectReference Include="..\2022-02-11.Repositories\2022-02-11.Repositories.csproj" />
     <ProjectReference Include="..\20220211.Identity\20220211.Identity.csproj" />
   </ItemGroup>

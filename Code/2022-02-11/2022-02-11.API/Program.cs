@@ -2,6 +2,7 @@ using _2022_02_11.API.Context;
 using _2022_02_11.API.DataAccess.Interfaces;
 using _2022_02_11.API.DataAccess.Repositories;
 using _2022_02_11.Entities.DataSeeding;
+using _2022_02_11.Infrastructure;
 using _2022_02_11.Repositories;
 using _20220211.Identity.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -104,6 +105,13 @@ builder.Services.AddAuthentication(auth =>
 });
 
 builder.Services.AddScoped<IUnitOfWork, EfUnitOfWork>();
+
+builder.Services.AddScoped(sp => new AuthOptions
+{
+    Audience = builder.Configuration["AuthSettings:Audience"],
+    Issuer = builder.Configuration["AuthSettings:Issuer"],
+    Key = builder.Configuration["AuthSettings:Key"]
+});
 
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<IUserProfileRepository, UserProfileRepository>();

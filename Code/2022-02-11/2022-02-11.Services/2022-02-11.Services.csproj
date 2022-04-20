@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>_2022_02_11.Services</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\2022-02-11.Infrastructure\2022-02-11.Infrastructure.csproj" />
+    <ProjectReference Include="..\2022-02-11.Repositories\2022-02-11.Repositories.csproj" />
+  </ItemGroup>
+
+</Project>
