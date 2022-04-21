@@ -8,9 +8,9 @@ namespace _2022_02_11.API.Controllers
     [ApiController]
 public class UserController : ControllerBase
 {
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public UserController(UserManager<IdentityUser> userManager)
+    public UserController(UserManager<ApplicationUser> userManager)
     {
         _userManager = userManager;
     }
@@ -23,17 +23,17 @@ public class UserController : ControllerBase
             if (await _userManager.FindByEmailAsync(appUser.Email) != null)
                 return BadRequest("Email already exists");
 
-            var user = new IdentityUser
+            var user = new ApplicationUser
             {
                 Email = appUser.Email,
                 UserName = appUser.Email
             };
 
-            var userCreatedResult = await _userManager.CreateAsync(user, "Software1.");
+            var userCreatedResult = await _userManager.CreateAsync(appUser, "Software1.");
 
             if (userCreatedResult.Succeeded)
             {
-                var userRoleAsignationResult = await _userManager.AddToRoleAsync(user, "Admin");
+                var userRoleAsignationResult = await _userManager.AddToRoleAsync(appUser, "Admin");
                 if (userRoleAsignationResult.Succeeded)
                     return Ok();
                 else

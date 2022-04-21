@@ -27,10 +27,10 @@ namespace _2022_02_11.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly AuthOptions _authOptions;
 
-        public UsersService(IUnitOfWork unitOfWork/*, AuthOptions authOptions*/)
+        public UsersService(IUnitOfWork unitOfWork, AuthOptions authOptions)
         {
             _unitOfWork = unitOfWork;
-            //_authOptions = authOptions;
+            _authOptions = authOptions;
         }
 
         public async Task<LoginResponse> GenerateTokenAsync(LoginRequest model)
