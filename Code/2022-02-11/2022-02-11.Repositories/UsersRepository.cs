@@ -5,9 +5,9 @@ namespace _2022_02_11.Repositories
 {
     public class UsersRepository : IUsersRepository
     {
-        private readonly UserManager<IdentityUser> _userManager;        
+        private readonly UserManager<ApplicationUser> _userManager;        
 
-        public UsersRepository(UserManager<IdentityUser> userManager)
+        public UsersRepository(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;            
         }
