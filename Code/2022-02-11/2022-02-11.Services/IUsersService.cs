@@ -15,7 +15,7 @@ namespace _2022_02_11.Services
     public interface IUsersService
     {
 
-        //Task<OperationResponse<string>> RegisterUserAsync(RegisterRequest model);
+        Task<OperationResponse<string>> RegisterUserAsync(RegisterRequest model);
 
         Task<LoginResponse> GenerateTokenAsync(LoginRequest model);
 
@@ -78,40 +78,38 @@ namespace _2022_02_11.Services
 
             return new LoginResponse
             {
-                Message = "Welcome to dotNet Labs",
+                Message = "Welcome to Application",
                 IsSuccess = true,
                 AccessToken = tokenAsString,
                 ExpiryDate = expireDate
             };
         }
 
-        //public async Task<OperationResponse<string>> RegisterUserAsync(RegisterRequest model)
-        //{
-        //    var userByEmail = await _unitOfWork.Users.GetUserByEmailAsync(model.Email);
-        //    if (userByEmail != null)
-        //    {
-        //        return new OperationResponse<string>
-        //        {
-        //            IsSuccess = false,
-        //            Message = "User is already exists",
-        //        };
-        //    }
+        public async Task<OperationResponse<string>> RegisterUserAsync(RegisterRequest model)
+        {
+            var userByEmail = await _unitOfWork.Users.GetUserByEmailAsync(model.Email);
+            if (userByEmail != null)
+            {
+                return new OperationResponse<string>
+                {
+                    IsSuccess = false,
+                    Message = "User is already exists",
+                };
+            }
 
-        //    var user = new ApplicationUser
-        //    {
-        //        FirstName = model.FirstName,
-        //        LastName = model.LastName,
-        //        Email = model.Email,
-        //        UserName = model.Email
-        //    };
+            var user = new ApplicationUser
+            {                
+                Email = model.Email,
+                UserName = model.Email
+            };
 
-        //    await _unitOfWork.Users.CreateUserAsync(user, model.Password, "User");
+            await _unitOfWork.Users.CreateUserAsync(user, model.Password, "User");
 
-        //    return new OperationResponse<string>
-        //    {
-        //        Message = "Welcome to donNet Labs",
-        //        IsSuccess = true
-        //    };
-        //}
+            return new OperationResponse<string>
+            {
+                Message = "Welcome to donNet Labs",
+                IsSuccess = true
+            };
+        }
     }
 }
