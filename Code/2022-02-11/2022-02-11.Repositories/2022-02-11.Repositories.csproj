@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\2022-02-11.Entities\2022-02-11.Entities.csproj" />
     <ProjectReference Include="..\20220211.Identity\20220211.Identity.csproj" />
   </ItemGroup>

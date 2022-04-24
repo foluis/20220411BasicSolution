@@ -1,5 +1,5 @@
-﻿using _2022_02_11.API.Context;
-using _2022_02_11.API.DataAccess.Interfaces;
+﻿using _2022_02_11.API.DataAccess.Interfaces;
+using _2022_02_11.Entities.Context;
 using _2022_02_11.Entities.DTOs;
 using _2022_02_11.Entities.Models;
 using AutoMapper;

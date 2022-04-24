@@ -10,9 +10,10 @@ namespace _2022_02_11.Repositories
     {
 
         IUsersRepository Users { get; }
-        //IPlaylistsRepository Playlists { get; }
+        IUsersProfileRepository UsersProfile { get; }
         //IVideosRepository Videos { get; }
         //ICommentsRepository Comments { get; }
+        Task CommitIdentityChangesAsync();
         Task CommitChangesAsync();
     }
 }
