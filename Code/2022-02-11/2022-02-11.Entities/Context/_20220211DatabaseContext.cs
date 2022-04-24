@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using _2022_02_11.Entities.DTOs;
 
-namespace _2022_02_11.API.Context
+namespace _2022_02_11.Entities.Context
 {
     public partial class _20220211DatabaseContext : DbContext
     {

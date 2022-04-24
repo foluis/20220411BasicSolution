@@ -8,7 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Context\_20220211IdentityContext.cs" />
+    <Compile Remove="Context\**" />
+    <Content Remove="Context\**" />
+    <EmbeddedResource Remove="Context\**" />
+    <None Remove="Context\**" />
   </ItemGroup>
 
   <ItemGroup>

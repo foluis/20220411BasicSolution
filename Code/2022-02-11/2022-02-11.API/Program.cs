@@ -1,7 +1,5 @@
-using _2022_02_11.API.Context;
-using _2022_02_11.API.DataAccess.Interfaces;
-using _2022_02_11.API.DataAccess.Repositories;
-using _2022_02_11.Entities.DataSeeding;
+
+using _2022_02_11.Entities.Context;
 using _2022_02_11.Entities.Models;
 using _2022_02_11.Infrastructure;
 using _2022_02_11.Repositories;
@@ -63,9 +61,10 @@ builder.Services.AddScoped(sp => new AuthOptions
 });
 
 builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddScoped<IUsersProfileService, UsersProfileService>();
 
 builder.Services.AddAutoMapper(typeof(Program));
-builder.Services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+//builder.Services.AddScoped<IUserProfileRepository, UserProfileRepository>();
 
 
 builder.Services.AddControllers();
