@@ -1,5 +1,6 @@
 ﻿using _2022_02_11.Entities.DTOs;
 using _2022_02_11.Entities.Models;
+using _2022_02_11.Infrastructure;
 using _2022_02_11.Repositories;
 
 namespace _2022_02_11.Services
@@ -21,19 +22,23 @@ namespace _2022_02_11.Services
     public class UsersProfileService : IUsersProfileService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IdentityOptions _identity;
 
-        public UsersProfileService(IUnitOfWork unitOfWork)
+        public UsersProfileService(IUnitOfWork unitOfWork, IdentityOptions identity)
         {
             _unitOfWork = unitOfWork;
+            _identity = identity;
         }
 
         public async Task<OperationResponse<UserProfile>> CreateAsync(UserProfile model)
         {
+            var currentUser = _identity.UserId;
+
             var userProfile = new TblUserProfile()
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                UserId = model.UserId
+                UserId = model.UserId                
             };
 
             await _unitOfWork.UsersProfile.CreateAsync(userProfile);

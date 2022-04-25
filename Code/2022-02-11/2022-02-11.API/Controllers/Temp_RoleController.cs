@@ -6,11 +6,11 @@ namespace _2022_02_11.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RoleController : ControllerBase
+    public class Temp_RoleController : ControllerBase
     {
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public RoleController(RoleManager<IdentityRole> roleManager)
+        public Temp_RoleController(RoleManager<IdentityRole> roleManager)
         {
             _roleManager = roleManager;
         }

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -60,6 +61,29 @@ builder.Services.AddScoped(sp => new AuthOptions
     Key = builder.Configuration["AuthSettings:Key"]
 });
 
+builder.Services.AddScoped(sp =>
+{
+    var httpContext = sp.GetService<IHttpContextAccessor>().HttpContext;
+
+    var identityOptions = new _2022_02_11.Infrastructure.IdentityOptions();
+
+    if (httpContext.User.Identity.IsAuthenticated)
+    {
+        string id = httpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        string firstName = httpContext.User.FindFirst(ClaimTypes.GivenName).Value;
+        string lastName = httpContext.User.FindFirst(ClaimTypes.Surname).Value;
+        string email = httpContext.User.FindFirst(ClaimTypes.Email).Value;
+        string role = httpContext.User.FindFirst(ClaimTypes.Role).Value;
+
+        identityOptions.UserId = id;
+        identityOptions.Email = email;
+        identityOptions.FullName = $"{firstName} {lastName}";
+        identityOptions.IsAdmin = role == "Admin" ? true : false;
+    }
+
+    return identityOptions;
+});
+
 builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddScoped<IUsersProfileService, UsersProfileService>();
 
@@ -84,6 +108,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -9,9 +9,9 @@ namespace _2022_02_11.API.Controllers
     [ApiController]
     public class UserProfileController : ControllerBase
     {
-        private readonly IUserProfileRepository _repository;
+        private readonly Temp_IUserProfileRepository _repository;
 
-        public UserProfileController(IUserProfileRepository repository)
+        public UserProfileController(Temp_IUserProfileRepository repository)
         {
             _repository = repository;
         }

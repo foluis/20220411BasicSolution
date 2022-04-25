@@ -3,7 +3,7 @@
 namespace _2022_02_11.API.DataAccess.Interfaces
 {
 
-    public interface IUserProfileRepository
+    public interface Temp_IUserProfileRepository
     {
         Task<IEnumerable<UserProfile>> Search(string firstName, string? lastName);
         Task<IEnumerable<UserProfile>> GetUsersProfile();

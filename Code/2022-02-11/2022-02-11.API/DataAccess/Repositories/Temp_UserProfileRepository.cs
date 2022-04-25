@@ -7,12 +7,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace _2022_02_11.API.DataAccess.Repositories
 {
-    public class UserProfileRepository : IUserProfileRepository
+    public class Temp_UserProfileRepository : Temp_IUserProfileRepository
     {
         private readonly _20220211DatabaseContext _context;
         private readonly IMapper _mapper;
 
-        public UserProfileRepository(_20220211DatabaseContext dataContext, IMapper mapper)
+        public Temp_UserProfileRepository(_20220211DatabaseContext dataContext, IMapper mapper)
         {
             _context = dataContext;
             _mapper = mapper;

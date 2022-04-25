@@ -6,11 +6,11 @@ namespace _2022_02_11.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-public class UserController : ControllerBase
+public class Temp_UserController : ControllerBase
 {
     private readonly UserManager<ApplicationUser> _userManager;
 
-    public UserController(UserManager<ApplicationUser> userManager)
+    public Temp_UserController(UserManager<ApplicationUser> userManager)
     {
         _userManager = userManager;
     }
