@@ -8,7 +8,7 @@ namespace _2022_02_11.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class UserProfileController2 : ControllerBase
     {
         private readonly IUsersProfileService _usersProfileService;
