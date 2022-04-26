@@ -1,5 +1,6 @@
-﻿using _2022_02_11.API.DataAccess.Interfaces;
-using _2022_02_11.Entities.Models;
+﻿using _2022_02_11.Entities.Models;
+using _2022_02_11.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,70 +8,27 @@ namespace _2022_02_11.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserProfileController : ControllerBase
     {
-        private readonly Temp_IUserProfileRepository _repository;
+        private readonly IUsersProfileService _usersProfileService;
 
-        public UserProfileController(Temp_IUserProfileRepository repository)
+        public UserProfileController(IUsersProfileService usersProfileService)
         {
-            _repository = repository;
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> GetUsersProfile()
-        {
-            try
-            {
-                return Ok(await _repository.GetUsersProfile());
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                    "Error retrieving data from the database");
-            }
-        }
-
-        [HttpGet("{id:int}")]
-        public async Task<ActionResult<UserProfile>> GetUserProfile(int id)
-        {
-            try
-            {
-                var result = await _repository.GetUserProfile(id);
-
-                if (result == null)
-                {
-                    return NotFound();
-                }
-
-                return result;
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                    "Error retrieving data from the database");
-            }
+            _usersProfileService = usersProfileService;
         }
 
         [HttpPost]
-        public async Task<ActionResult<UserProfile>> CreateUserProfile(UserProfile userProfile)
+        public async Task<ActionResult> CreateUserProfile(UserProfile model)
         {
             try
             {
-                if (userProfile == null)
-                    return BadRequest();
+                var result = await _usersProfileService.CreateAsync(model);
 
-                //var emp = await _repository.GetEntityByName(UserProfile.FirstName);
+                if (result.IsSuccess)
+                    return Ok(result);
 
-                //if (emp != null)
-                //{
-                //    ModelState.AddModelError("Email", "UserProfile name already in use");
-                //    return BadRequest(ModelState);
-                //}
-
-                var createdUserProfile = await _repository.AddUserProfile(userProfile);
-
-                return CreatedAtAction(nameof(GetUserProfile),
-                    new { id = createdUserProfile.Id }, createdUserProfile);
+                return BadRequest(result);
             }
             catch (Exception ex)
             {
@@ -79,51 +37,37 @@ namespace _2022_02_11.API.Controllers
             }
         }
 
-        [HttpPut("{id:int}")]
-        public async Task<ActionResult<UserProfile>> UpdateTournament(int id, UserProfile userProfile)
+        [ProducesResponseType(200, Type = typeof(CollectionResponse<UserProfile>))]
+        [AllowAnonymous]
+        [HttpGet("GetAll")]
+        public IActionResult GetAll(int pageNumber, int pageSize)
         {
-            try
-            {
-                if (id != userProfile.Id)
-                    return BadRequest("User Profile ID mismatch");
-
-                var UpdateUserProfileToUpdate = await _repository.GetUserProfile(id);
-
-                if (UpdateUserProfileToUpdate == null)
-                {
-                    return NotFound($"User Profile with Id = {id} not found");
-                }
-
-                return await _repository.UpdateUserProfile(userProfile);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                    "Error updating User Profile record");
-            }
+            var result = _usersProfileService.GetAll("",pageNumber, pageSize);
+            return Ok(result);
         }
 
-        [HttpDelete("{id:int}")]
-        public async Task<ActionResult> DeleteUserProfile(int id)
+        [ProducesResponseType(200, Type = typeof(OperationResponse<UserProfile>))]
+        [ProducesResponseType(400, Type = typeof(OperationResponse<UserProfile>))]
+        [HttpPut("Update")]
+        public async Task<IActionResult> Update(UserProfile model)
         {
-            try
-            {
-                var UserProfileToDelete = await _repository.GetUserProfile(id);
+            var result = await _usersProfileService.UpdateAsync(model);
+            if (result.IsSuccess)
+                return Ok(result);
 
-                if (UserProfileToDelete == null)
-                {
-                    return NotFound($"User profile with Id = {id} not found");
-                }
+            return BadRequest(result);
+        }
 
-                await _repository.DeleteUserProfile(id);
+        [ProducesResponseType(200, Type = typeof(OperationResponse<UserProfile>))]
+        [ProducesResponseType(400, Type = typeof(OperationResponse<UserProfile>))]
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _usersProfileService.RemoveAsync(id);
+            if (result.IsSuccess)
+                return Ok(result);
 
-                return Ok($"User profile with Id = {id} deleted");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                    "Error deleting User profile record");
-            }
+            return BadRequest(result);
         }
     }
 }
